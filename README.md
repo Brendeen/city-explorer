@@ -4,20 +4,27 @@
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
+This application is used as a detailed information hub for different citys in the US, simply search what city you want to view and the citys name, LAT and LON, and an image of the city will appear after hitting the Explore button.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+To build a similar application, the user must install all the necessary terminal add ons, use a text editor (such as vs code) that can import react and bootstrap.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+In this application, we used React JS along with bootstrap and React-Bootstrap, as well as basic css styling.
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+01-25-2023 8:34, basic frame work done.
+01-25-2023 9:15, City title displays appon search.
+01-25-2023 10:03, functionality of LAT and LON implimented on search.
+01-26-2023 3:40, functionality of map display on search.
+01-25-2023
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Done alongside Anthony Lopez and Yuri Hlukhyi, and used LocationIQ for API data.
 
 ![Client to server process](./imgs/client-server-process.png)
