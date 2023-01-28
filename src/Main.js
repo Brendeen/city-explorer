@@ -1,6 +1,5 @@
 import React from "react";
 import Error from "./Error";
-import Resturants from "./Resturants";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 
@@ -15,7 +14,8 @@ class Main extends React.Component {
       restresturantData: [],
       locationData: [],
       weatherData: [],
-      errorData: false
+      errorData: false,
+      cityMapUrl: '',
     }
   }
 
@@ -25,6 +25,7 @@ class Main extends React.Component {
       city: cityName
     },
       () => console.log(this.state.city)
+      // clutters console
     )
   }
 
@@ -34,16 +35,17 @@ class Main extends React.Component {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`;
 
       
-
-      // let url2 = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=9`;
-
-      let responce = await axios.get(url);
-
-      console.log(responce.data[0]);
+     
+      
+      let response = await axios.get(url);
+      
+      let url2 = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=9`;
+      console.log(response.data[0]);
 
       this.setState({
         displayInfo: true,
-        cityData: responce.data[0]
+        cityData: response.data[0],
+        cityMapUrl: url2
       })
     }
     catch(error){
@@ -81,7 +83,7 @@ class Main extends React.Component {
           <>
             <h2>{this.state.cityData.display_name}</h2>
             <p>Lat:{this.state.cityData.lat}  Lon:{this.state.cityData.lon}</p>
-            <img id="image" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=11`} />
+            <img id="image" src={this.state.cityMapUrl} alt="Image of searched city"/>
           </>
         }
         <Error errorData={this.state.errorData} closeModal={this.closeModal}/>
