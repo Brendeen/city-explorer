@@ -83,7 +83,7 @@ class Main extends React.Component {
           <>
             <h2>{this.state.cityData.display_name}</h2>
             <p>Lat:{this.state.cityData.lat}  Lon:{this.state.cityData.lon}</p>
-            <img id="image" src={this.state.cityMapUrl} alt="Image of searched city"/>
+            <img id="image" src={this.state.cityMapUrl} alt={this.state.cityData.display_name}/>
           </>
         }
         <Error errorData={this.state.errorData} closeModal={this.closeModal}/>
