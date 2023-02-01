@@ -2,6 +2,7 @@ import React from "react";
 import Error from "./Error";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
+import Weather from "./Weather";
 
 class Main extends React.Component {
   constructor(props) {
@@ -13,9 +14,10 @@ class Main extends React.Component {
       cityData: {},
       restresturantData: [],
       locationData: [],
-      weatherData: [],
+      weatherDay: [],
       errorData: false,
       cityMapUrl: '',
+
     }
   }
 
@@ -42,15 +44,25 @@ class Main extends React.Component {
       let url2 = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=9`;
       console.log(response.data[0]);
 
+      this.getWeather(response.data[0].lat, response.data[0].lon);
+
       this.setState({
         displayInfo: true,
         cityData: response.data[0],
-        cityMapUrl: url2
+        cityMapUrl: url2,
       })
     }
     catch(error){
       this.errorModal(error);
     }
+  }
+
+  getWeather = async (lat, lon) => {
+    const url3 = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&center=${lat},${lon}&zoom=9`
+    const response = await axios.get(url3);
+    this.setState({
+      weatherDay: response.data
+    })
   }
 
   closeModal = () =>{
@@ -67,6 +79,7 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log(this.state.weatherDay)
     return (
       <>
         <Container className="Form">
@@ -87,6 +100,7 @@ class Main extends React.Component {
           </>
         }
         <Error errorData={this.state.errorData} closeModal={this.closeModal}/>
+        <Weather weatherDay={this.state.weatherDay}/>
       </>
     )
   }

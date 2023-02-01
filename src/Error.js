@@ -6,7 +6,6 @@ class Error extends React.Component {
     return (
       <>
        <p>{this.props.errorData}</p>
-       <p>hello world</p>
         <Modal show={this.props.errorData} onHide={this.props.closeModal}>
         <Modal.Dialog>
         <Modal.Header closeButton>
