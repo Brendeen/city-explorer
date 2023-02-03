@@ -24,6 +24,11 @@ button.btn {
   background-color: darkblue;
 }
 
+main {
+  border-radius: 15px;
+  background-color: darkgray;
+}
+
 h2, p {
   text-align: center;
 }
@@ -35,11 +40,18 @@ h2, p {
   margin-bottom: 50px;
 }
 
+#weatherJSON {
+  background-color: darkgray;
+  border-radius: 10px;
+}
+
 footer {
   text-align: center;
   background-color: deepskyblue;
   border: solid black 5px;
   border-radius: 10px;
+  position: relative;
+  bottom: 0;
 }
 
 
