@@ -3,6 +3,7 @@ import Error from "./Error";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import Weather from "./Weather";
+import Alert from 'react-bootstrap/Alert';
 
 class Main extends React.Component {
   constructor(props) {
@@ -26,8 +27,7 @@ class Main extends React.Component {
     this.setState({
       city: cityName
     },
-      () => console.log(this.state.city)
-      // clutters console
+
     )
   }
 
@@ -36,11 +36,11 @@ class Main extends React.Component {
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`;
 
-      
-     
-      
+
+
+
       let response = await axios.get(url);
-      
+
       let url2 = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=9`;
       console.log(response.data[0]);
 
@@ -52,20 +52,33 @@ class Main extends React.Component {
         cityMapUrl: url2,
       })
     }
-    catch(error){
+    catch (error) {
       this.errorModal(error);
     }
   }
 
   getWeather = async (lat, lon) => {
-    const url3 = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&center=${lat},${lon}&zoom=9`
-    const response = await axios.get(url3);
-    this.setState({
-      weatherDay: response.data
-    })
+    try {
+      const url3 = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
+      const response = await axios.get(url3);
+      this.setState({
+        weatherDay: response.data
+      })
+    }
+    catch (error) {
+      return (
+        <>
+
+          <Alert variant="primary">
+            No extra data on this city.
+          </Alert>
+
+        </>
+      );
+    }
   }
 
-  closeModal = () =>{
+  closeModal = () => {
     this.setState({
       errorData: false
     })
@@ -81,7 +94,7 @@ class Main extends React.Component {
   render() {
     console.log(this.state.weatherDay)
     return (
-      <>
+      <main>
         <Container className="Form">
           <Form>
             <Form.Group>
@@ -96,12 +109,12 @@ class Main extends React.Component {
           <>
             <h2>{this.state.cityData.display_name}</h2>
             <p>Lat:{this.state.cityData.lat}  Lon:{this.state.cityData.lon}</p>
-            <img id="image" src={this.state.cityMapUrl} alt={this.state.cityData.display_name}/>
+            <img id="image" src={this.state.cityMapUrl} alt={this.state.cityData.display_name} />
           </>
         }
-        <Error errorData={this.state.errorData} closeModal={this.closeModal}/>
-        <Weather weatherDay={this.state.weatherDay}/>
-      </>
+        <Error errorData={this.state.errorData} closeModal={this.closeModal} />
+        <Weather weatherDay={this.state.weatherDay} />
+      </main>
     )
   }
 }
