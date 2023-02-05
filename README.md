@@ -17,11 +17,14 @@ In this application, we used React JS along with bootstrap and React-Bootstrap, 
 
 ## Change Log
 
-01-25-2023 8:34, basic frame work done.
-01-25-2023 9:15, City title displays appon search.
-01-25-2023 10:03, functionality of LAT and LON implimented on search.
-01-26-2023 3:40, functionality of map display on search.
-01-25-2023
+01-25-2023, basic frame work done.
+01-25-2023, City title displays appon search.
+01-25-2023, functionality of LAT and LON implimented on search.
+01-26-2023, functionality of map display on search.
+01-26-2023, server set up.
+01-28-2023, used api data in functions instead of JSON file.
+01-28-2023, added functionality of movie searches within city name.
+02-04-2023, deployed server to render.com.
 
 ## Credit and Collaborations
 
