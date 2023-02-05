@@ -40,9 +40,50 @@ h2, p {
   margin-bottom: 50px;
 }
 
-#weatherJSON {
-  background-color: darkgray;
+.weatherContainer {
+  display: flex !important;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: auto;
+}
+
+#weatherDiv {
+  background-color: rgb(122, 122, 122);
   border-radius: 10px;
+  max-width: fit-content;
+  margin: 20px;
+}
+
+.movieContainer {
+  display: flex !important;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50px;
+  height: auto;
+}
+
+#movieDiv {
+  background-color: rgb(80, 80, 80);
+  border-radius: 10px;
+  max-width: 300px;
+  margin: 20px;
+}
+
+h3 {
+  text-align: center;
+}
+
+#cardImg {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 150px;
+  height: auto;
 }
 
 footer {
