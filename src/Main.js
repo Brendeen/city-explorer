@@ -4,6 +4,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import Weather from "./Weather";
 import Alert from 'react-bootstrap/Alert';
+import Movie from "./Movie";
 
 class Main extends React.Component {
   constructor(props) {
@@ -13,11 +14,12 @@ class Main extends React.Component {
       displayInfo: false,
       city: '',
       cityData: {},
-      restresturantData: [],
+      movieNum: [],
       locationData: [],
       weatherDay: [],
       errorData: false,
       cityMapUrl: '',
+
 
     }
   }
@@ -45,6 +47,7 @@ class Main extends React.Component {
       console.log(response.data[0]);
 
       this.getWeather(response.data[0].lat, response.data[0].lon);
+      this.getMovie()
 
       this.setState({
         displayInfo: true,
@@ -59,7 +62,7 @@ class Main extends React.Component {
 
   getWeather = async (lat, lon) => {
     try {
-      const url3 = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
+      const url3 = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`;
       const response = await axios.get(url3);
       this.setState({
         weatherDay: response.data
@@ -78,6 +81,28 @@ class Main extends React.Component {
     }
   }
 
+  getMovie = async () => {
+    try {
+      const url4 = `${process.env.REACT_APP_SERVER}/movies?query=${this.state.city}`;
+      console.log(url4)
+      const response2 = await axios.get(url4);
+      this.setState({
+        movieNum: response2.data
+      })
+    }
+    catch (error) {
+      return (
+        <>
+
+          <Alert variant="primary">
+            No extra data on this city.
+          </Alert>
+
+        </>
+      );
+    }
+  }
+  
   closeModal = () => {
     this.setState({
       errorData: false
@@ -114,6 +139,7 @@ class Main extends React.Component {
         }
         <Error errorData={this.state.errorData} closeModal={this.closeModal} />
         <Weather weatherDay={this.state.weatherDay} />
+        <Movie movieNum={this.state.movieNum} />
       </main>
     )
   }
