@@ -2,9 +2,9 @@ import React from "react";
 import Error from "./Error";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
-import Weather from "./Weather";
+import Weather from "./components/Weather";
 import Alert from 'react-bootstrap/Alert';
-import Movie from "./Movie";
+import Movies from "./components/Movies";
 
 class Main extends React.Component {
   constructor(props) {
@@ -67,6 +67,7 @@ class Main extends React.Component {
       this.setState({
         weatherDay: response.data
       })
+      console.log(response.data)
     }
     catch (error) {
       return (
@@ -117,7 +118,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.state.weatherDay)
     return (
       <main>
         <Container className="Form">
@@ -138,8 +138,8 @@ class Main extends React.Component {
           </>
         }
         <Error errorData={this.state.errorData} closeModal={this.closeModal} />
-        <Weather weatherDay={this.state.weatherDay} />
-        <Movie movieNum={this.state.movieNum} />
+        <Weather WeatherDay={this.state.weatherDay} />
+        <Movies movieNum={this.state.movieNum} />
       </main>
     )
   }
